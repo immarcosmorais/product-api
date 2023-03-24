@@ -2,15 +2,13 @@ import express from "express";
 import cors from "cors";
 import winston from "winston";
 
-// import clientsRouter from "./routes/client.route.js";
-// import productRouter from "./routes/product.route.js";
-// import saleRouter from "./routes/sale.route.js";
-// import supplierRouter from "./routes/supplier.route.js";
+import productRouter from "./routes/product.route.js";
 
 const { combine, timestamp, label, printf } = winston.format;
 const myFormat = printf(({ level, message, label, timestamp }) => {
   return `${timestamp} [${label}] ${level}: ${message}`;
 });
+
 global.apiName = "product-api";
 global.logger = winston.createLogger({
   level: "silly",
@@ -26,10 +24,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// app.use("/client", clientsRouter);
-// app.use("/product", productRouter);
-// app.use("/sale", saleRouter);
-// app.use("/supplier", supplierRouter);
+app.use("/product", productRouter);
 
 app.use((err, req, res, next) => {
   logger.error(`${req.method} ${req.baseUrl} - ${err.message}`);
