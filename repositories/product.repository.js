@@ -16,32 +16,32 @@ async function all() {
   }
 }
 
-async function find(id) {
+async function find(code) {
   try {
-    return await Product.findByPk(id);
+    return await Product.findByPk(code);
   } catch (err) {
     throw err;
   }
 }
 
-async function update(product, id) {
+async function update(product, code) {
   try {
     await Product.update(product, {
       where: {
-        productId: id,
+        code: code,
       },
     });
-    return await find(id);
+    return await find(code);
   } catch (err) {
     throw err;
   }
 }
 
-async function remove(id) {
+async function remove(code) {
   try {
     await Product.destroy({
       where: {
-        productId: id,
+        code: code,
       },
     });
   } catch (err) {

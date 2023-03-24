@@ -1,14 +1,21 @@
 import productService from "../services/product.service.js";
 
-function validadeBody(body) {
+function validadeBodyToCreate(body) {
   if (!body.code || !body.description || !body.price) {
     throw new Error("Filds 'code', 'description' e 'price' are mandatories.");
   }
   return body;
 }
 
+function validadeBodyToUpdate(body) {
+  if (!body.description || !body.price) {
+    throw new Error("Filds 'description' e 'price' are mandatories.");
+  }
+  return body;
+}
+
 async function create(req, res, next) {
-  const product = validadeBody(req.body);
+  const product = validadeBodyToCreate(req.body);
   try {
     res.send(await productService.create(product));
     logger.info(`POST /product - ${JSON.stringify(product)}`);
@@ -46,7 +53,7 @@ async function remove(req, res, next) {
 }
 
 async function update(req, res, next) {
-  const product = validadeBody(req.body);
+  const product = validadeBodyToUpdate(req.body);
   try {
     res.send(await productService.update(product, req.params.id));
     logger.info(`PUT /product - ${JSON.stringify(product)}`);

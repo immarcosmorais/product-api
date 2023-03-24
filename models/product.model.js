@@ -4,14 +4,9 @@ import db from "../repositories/db.js";
 const Product = db.define(
   "products",
   {
-    productId: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      allowNull: false,
-      primaryKey: true,
-    },
     code: {
       type: Sequelize.STRING,
+      primaryKey: true,
       allowNull: false,
     },
     description: {
