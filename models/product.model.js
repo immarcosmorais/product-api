@@ -21,4 +21,6 @@ const Product = db.define(
   { underscored: true }
 );
 
+await Product.sync();
+
 export default Product;
